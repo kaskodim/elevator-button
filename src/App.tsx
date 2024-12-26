@@ -1,10 +1,10 @@
 import React from 'react';
-import ElevatorButton from './components/elevatorButton/ElevatorButton';
+import Elevator from './components/Elevator';
 
 function App() {
     return (
         <div className="App">
-            <ElevatorButton/>
+            <Elevator/>
         </div>
     );
 }
