@@ -1,11 +1,12 @@
 import React from 'react';
-import Elevator from './components/Elevator';
+import Elevator from './components/Elevator/Elevator';
+import {SElevator} from './components/Elevator/style';
 
 function App() {
     return (
-        <div className="App">
+        <SElevator>
             <Elevator/>
-        </div>
+        </SElevator>
     );
 }
 
