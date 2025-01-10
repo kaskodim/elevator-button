@@ -1,16 +1,27 @@
 import {SFloor} from './styles';
 
-type FloorPropsType = {
+export type FloorPropsType = {
     id?: number
     floor: number
     title: string
-    height: string
+    height: number
+    elevatorMovement: (floor: number) => void
 }
 
 export const Floor = (props: FloorPropsType) => {
+
+    function onClickHandler(floor: number) {
+        props.elevatorMovement(floor)
+    }
+
+    // console.log(props)
     // + логика на будущее
     return (
-        <SFloor height={props.height}>
+        <SFloor height={props.height}
+                onClick={() => {
+                    onClickHandler(props.floor)
+                }}
+        >
             {props.title}
             {props.floor}
         </SFloor>
