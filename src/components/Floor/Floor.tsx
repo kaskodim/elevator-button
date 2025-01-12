@@ -1,4 +1,4 @@
-import {SFloor} from './styles';
+import {SFloor, SFloorInner} from './styles';
 
 export type FloorPropsType = {
     id?: number
@@ -18,12 +18,23 @@ export const Floor = (props: FloorPropsType) => {
     // + логика на будущее
     return (
         <SFloor height={props.height}
-                onClick={() => {
-                    onClickHandler(props.floor)
-                }}
+
         >
-            {props.title}
-            {props.floor}
+            <SFloorInner>
+                <>
+                    {props.title}
+                    {props.floor}
+                </>
+
+                <button
+                    onClick={() => {
+                        onClickHandler(props.floor)
+                    }}>кнопка
+                </button>
+
+
+            </SFloorInner>
+
         </SFloor>
     )
 }
