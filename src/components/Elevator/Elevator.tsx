@@ -5,7 +5,7 @@ import {Lift} from '@src/components/Lift/Lift';
 import {useState} from 'react';
 
 
-const FLOOR_COUNT: number = 14;
+const FLOOR_COUNT: number = 10;
 const FLOOR_HEIGHT: number = 100;
 
 export const NORMAL_ELEVATOR_SPEED: number = 1.5;
