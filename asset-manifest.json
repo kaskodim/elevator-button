@@ -1,15 +1,13 @@
 {
   "files": {
-    "main.css": "/elevator-button/static/css/main.964fdded.css",
-    "main.js": "/elevator-button/static/js/main.f8527589.js",
-    "static/js/453.056b0f3b.chunk.js": "/elevator-button/static/js/453.056b0f3b.chunk.js",
+    "main.css": "/elevator-button/static/css/main.e6c13ad2.css",
+    "main.js": "/elevator-button/static/js/main.c5f57bb7.js",
     "index.html": "/elevator-button/index.html",
-    "main.964fdded.css.map": "/elevator-button/static/css/main.964fdded.css.map",
-    "main.f8527589.js.map": "/elevator-button/static/js/main.f8527589.js.map",
-    "453.056b0f3b.chunk.js.map": "/elevator-button/static/js/453.056b0f3b.chunk.js.map"
+    "main.e6c13ad2.css.map": "/elevator-button/static/css/main.e6c13ad2.css.map",
+    "main.c5f57bb7.js.map": "/elevator-button/static/js/main.c5f57bb7.js.map"
   },
   "entrypoints": [
-    "static/css/main.964fdded.css",
-    "static/js/main.f8527589.js"
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.c5f57bb7.js"
   ]
 }
