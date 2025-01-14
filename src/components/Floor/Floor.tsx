@@ -1,4 +1,8 @@
 import {SFloor, SFloorInner} from './styles';
+import {Button} from '@src/components/Button/Button';
+import {StatusType} from '@src/components/Lift/Lift';
+import {useState} from 'react';
+
 
 export type FloorPropsType = {
     id?: number
@@ -6,35 +10,31 @@ export type FloorPropsType = {
     title: string
     height: number
     elevatorMovement: (floor: number) => void
+    status: StatusType
 }
 
 export const Floor = (props: FloorPropsType) => {
 
     function onClickHandler(floor: number) {
         props.elevatorMovement(floor)
+
     }
 
-    // console.log(props)
-    // + логика на будущее
     return (
-        <SFloor height={props.height}
-
-        >
+        <SFloor height={props.height}>
             <SFloorInner>
                 <>
                     {props.title}
                     {props.floor}
                 </>
 
-                <button
+                <Button
+                    disabled={props.status !== 'stop'}
                     onClick={() => {
                         onClickHandler(props.floor)
                     }}>кнопка
-                </button>
-
-
+                </Button>
             </SFloorInner>
-
         </SFloor>
     )
 }
