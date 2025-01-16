@@ -1,12 +1,12 @@
 import React from 'react';
-import Elevator from './components/Elevator/Elevator';
-import {SElevator} from './components/Elevator/style';
+import {House} from '@src/components/House/House';
+import {SHouse} from '@src/components/House/style';
 
 function App() {
     return (
-        <SElevator>
-            <Elevator/>
-        </SElevator>
+        <SHouse>
+            <House/>
+        </SHouse>
     );
 }
 

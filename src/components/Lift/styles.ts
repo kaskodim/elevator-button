@@ -13,7 +13,7 @@ export type SLiftPropsType = {
 export const SLift = styled.div<SLiftPropsType>`
     width: 70px;
     height: ${props => props.height + 'px'};
-    margin-left: 5px;
+    margin-left: 15px;
     outline: 1px solid #53cd53;
     background-color: ${(st) => st.status === 'stop' ? 'yellow' : '#53CD53FF'};
     background-image: url(${liftImage});

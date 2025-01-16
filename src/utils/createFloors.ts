@@ -3,7 +3,7 @@ export function createFloors (floorsCount: number){
     for (let i = 1; i <= floorsCount; i++) {
         floors.push({
             id: i,
-            floor: i
+            floor: i,
         })
     }
     return floors
