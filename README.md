@@ -9,5 +9,5 @@
 > Пока не адаптировано под мобильную версию.
 
 ### Demo: 
-[https://kaskodim.github.io/elevator-button/](https://www.google.com)
+[https://kaskodim.github.io/elevator-button/](kaskodim.github.io/elevator-button/)
 

@@ -1,15 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {SLift} from '@src/components/Lift/styles';
-import {DELAYED_START, FloorValueButtonType, NORMAL_SPEED, SLOW_SPEED, VERY_SLOW_SPEED} from '@src/components/House/House';
-
+import {FloorValueButtonType} from '@src/components/House/House';
+import {DELAYED_START, NORMAL_SPEED, SLOW_SPEED, VERY_SLOW_SPEED} from '@src/constants';
+import {CSSProperties} from 'styled-components';
 
 export type LiftPropsType = {
-    floor: FloorValueButtonType
+    floorValueButton: FloorValueButtonType
     height: number
-    stopColorLift: (isPressed: boolean) => void
+    stopLift: (isPressed: boolean) => void
 }
 
-type TimingFunctionType = 'linear' | 'ease-in' | 'ease-out' | 'ease-in-out';
+type TimingFunctionType = Extract<CSSProperties['transitionTimingFunction'],
+    'linear' | 'ease-in' | 'ease-out' | 'ease-in-out'>
+
+
 export type StatusType = 'stop' | 'stopping' | 'progress' | 'start';
 
 export const Lift = (props: LiftPropsType) => {
@@ -19,54 +23,54 @@ export const Lift = (props: LiftPropsType) => {
     const [speed, setSpeed] = React.useState(SLOW_SPEED)
     const [timingFunction, setTimingFunction] = React.useState<TimingFunctionType>('ease-in');
 
-    const moveLift = (cF: number, delay: number) => {
+    const moveLift = (floor: number, delay: number) => {
 
 
-        if (cF === props.floor.floor) {
+        if (floor === props.floorValueButton.floor) {
             setStatus('stop')
             setSpeed(SLOW_SPEED)
             setTimingFunction('ease-in')
-            setCurrentFloor(cF)
-            props.stopColorLift(false)
+            setCurrentFloor(floor)
+            props.stopLift(false)
 
         } else {
 
-            if (cF < props.floor.floor) {
+            if (floor < props.floorValueButton.floor) {
 
                 setTimeout(() => {
-                    if (cF + 2 === props.floor.floor) {
+                    if (floor + 2 === props.floorValueButton.floor) {
                         setStatus('stopping')
                         setSpeed(SLOW_SPEED)
                         setTimingFunction('ease-out')
-                        moveLift(cF + 1, SLOW_SPEED,);
+                        moveLift(floor + 1, SLOW_SPEED,);
 
                     } else {
                         setStatus('progress')
                         setSpeed(NORMAL_SPEED)
                         setTimingFunction('linear')
-                        moveLift(cF + 1, NORMAL_SPEED);
+                        moveLift(floor + 1, NORMAL_SPEED);
                     }
                 }, delay * 1000)
-                setCurrentFloor(cF + 1)
+                setCurrentFloor(floor + 1)
             }
 
             // down
-            if (cF > props.floor.floor) {
+            if (floor > props.floorValueButton.floor) {
                 setTimeout(() => {
 
-                    if (cF - 2 === props.floor.floor) {
+                    if (floor - 2 === props.floorValueButton.floor) {
                         setStatus('stopping')
                         setSpeed(SLOW_SPEED)
                         setTimingFunction('ease-out')
-                        moveLift(cF - 1, SLOW_SPEED);
+                        moveLift(floor - 1, SLOW_SPEED);
                     } else {
                         setStatus('progress')
                         setSpeed(NORMAL_SPEED)
                         setTimingFunction('linear')
-                        moveLift(cF - 1, NORMAL_SPEED);
+                        moveLift(floor - 1, NORMAL_SPEED);
                     }
                 }, delay * 1000)
-                setCurrentFloor(cF - 1)
+                setCurrentFloor(floor - 1)
             }
         }
 
@@ -74,17 +78,14 @@ export const Lift = (props: LiftPropsType) => {
 
     useEffect(() => {
 
+        if (!(currentFloor === props.floorValueButton.floor)) {
 
-        if (currentFloor === props.floor.floor) {
-            console.log('mount')
-        } else {
             setStatus('start')
-
-            const customAnimation = Math.abs(currentFloor - props.floor.floor) !== 1;
+            const nextFloor = Math.abs(currentFloor - props.floorValueButton.floor) !== 1;
 
             setTimeout(() => {
 
-                if (customAnimation) {
+                if (nextFloor) {
                     setTimingFunction('ease-in')
                     setSpeed(SLOW_SPEED)
                     moveLift(currentFloor, speed);
@@ -96,9 +97,7 @@ export const Lift = (props: LiftPropsType) => {
                 }
             }, DELAYED_START)
         }
-
-
-    }, [props.floor])
+    }, [props.floorValueButton])
     return (
         <SLift
             status={status}

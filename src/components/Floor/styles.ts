@@ -17,8 +17,6 @@ export const SFloor = styled.div<{height: number}>`
 
 export const SFloorInner = styled.div`
 
-    font-family: "Be Vietnam Pro", sans-serif;
-    font-weight: 600;
-    font-style: normal;
+
 
 `

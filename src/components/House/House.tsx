@@ -3,16 +3,8 @@ import {Floor} from '../Floor/Floor';
 import {createFloors} from '@src/utils';
 import {Lift} from '@src/components/Lift/Lift';
 import {useState} from 'react';
-
-const FLOOR_NAME = 'ЭТАЖ '
-const FLOOR_COUNT: number = 7;
-const FLOOR_HEIGHT: number = 120;
-const DEFAULT_SPEED = 1
-
-export const NORMAL_SPEED: number = 1.2 / DEFAULT_SPEED;
-export const SLOW_SPEED: number = 2 / DEFAULT_SPEED;
-export const VERY_SLOW_SPEED: number = 4 / DEFAULT_SPEED;
-export const DELAYED_START: number = 1000
+import {SHouse} from '@src/components/House/style';
+import {FLOOR_COUNT, FLOOR_HEIGHT, FLOOR_NAME} from '@src/constants';
 
 export type FloorValueButtonType = {
     floor: number
@@ -25,37 +17,39 @@ export const House = () => {
 
     const floors = createFloors(FLOOR_COUNT)
 
-    const transmitsFloorValue = (floor: number) => {
+    const onStartLift = (floor: number) => {
         setFloorValueButton(
             {...floorValueButton, floor: floor, isPressed: true}
         )
     }
 
-    const transmitsElevatorStop = (isPressed: boolean) => {
+    const stopLift = (isPressed: boolean) => {
         setFloorValueButton(
             {...floorValueButton, isPressed: isPressed}
         )
     }
 
     return (
+<SHouse>
+    <Container>
+        {floors.reverse().map((f) => (
+                <Floor key={f.id}
+                       floor={f.floor}
+                       title={FLOOR_NAME}
+                       height={FLOOR_HEIGHT}
+                       onStartLift={onStartLift}
+                       isPressed={floorValueButton.floor === f.floor && floorValueButton.isPressed}
+                />
+            )
+        )}
 
-        <Container>
-            {floors.reverse().map((f) => (
-                    <Floor key={f.id}
-                           floor={f.floor}
-                           title={FLOOR_NAME}
-                           height={FLOOR_HEIGHT}
-                           transmitsFloorValue={transmitsFloorValue}
-                           isPressed={floorValueButton.floor === f.floor && floorValueButton.isPressed}
-                    />
-                )
-            )}
+        <Lift floorValueButton={floorValueButton}
+              height={FLOOR_HEIGHT}
+              stopLift={stopLift}
+        />
+    </Container>
+</SHouse>
 
-            <Lift floor={floorValueButton}
-                  height={FLOOR_HEIGHT}
-                  stopColorLift={transmitsElevatorStop}
-            />
-        </Container>
     );
 };
 
