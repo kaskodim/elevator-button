@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import {FLOOR_HEIGHT} from '@src/constants';
 
-export const SFloor = styled.div<{height: number}>`
+export const SFloor = styled.div`
     
-    height: ${props => (props.height + 'px')};
+    height: ${FLOOR_HEIGHT}px;
     font-size: 20px;
     outline: 4px solid #c13838;
     box-shadow: inset 0 4px 8px 3px #090909;
@@ -16,7 +17,4 @@ export const SFloor = styled.div<{height: number}>`
 `
 
 export const SFloorInner = styled.div`
-
-
-
 `

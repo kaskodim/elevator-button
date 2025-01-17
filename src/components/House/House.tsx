@@ -4,7 +4,7 @@ import {createFloors} from '@src/utils';
 import {Lift} from '@src/components/Lift/Lift';
 import {useState} from 'react';
 import {SHouse} from '@src/components/House/style';
-import {FLOOR_COUNT, FLOOR_HEIGHT, FLOOR_NAME} from '@src/constants';
+import {FLOOR_COUNT} from '@src/constants';
 
 export type FloorValueButtonType = {
     floor: number
@@ -23,33 +23,29 @@ export const House = () => {
         )
     }
 
-    const stopLift = (isPressed: boolean) => {
+    const onStopLift = () => {
         setFloorValueButton(
-            {...floorValueButton, isPressed: isPressed}
+            {...floorValueButton, isPressed: false}
         )
     }
 
     return (
-<SHouse>
-    <Container>
-        {floors.reverse().map((f) => (
-                <Floor key={f.id}
-                       floor={f.floor}
-                       title={FLOOR_NAME}
-                       height={FLOOR_HEIGHT}
-                       onStartLift={onStartLift}
-                       isPressed={floorValueButton.floor === f.floor && floorValueButton.isPressed}
+        <SHouse>
+            <Container>
+                {floors.map((f) => (
+                        <Floor key={f.id}
+                               floor={f.floor}
+                               onStartLift={onStartLift}
+                               isPressed={floorValueButton.floor === f.floor && floorValueButton.isPressed}
+                        />
+                    )
+                )}
+
+                <Lift floorValueButton={floorValueButton}
+                      onStopLift={onStopLift}
                 />
-            )
-        )}
-
-        <Lift floorValueButton={floorValueButton}
-              height={FLOOR_HEIGHT}
-              stopLift={stopLift}
-        />
-    </Container>
-</SHouse>
-
+            </Container>
+        </SHouse>
     );
 };
 

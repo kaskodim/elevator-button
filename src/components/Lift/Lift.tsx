@@ -2,19 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {SLift} from '@src/components/Lift/styles';
 import {FloorValueButtonType} from '@src/components/House/House';
 import {DELAYED_START, NORMAL_SPEED, SLOW_SPEED, VERY_SLOW_SPEED} from '@src/constants';
-import {CSSProperties} from 'styled-components';
+import {StatusType, TimingFunctionType} from '@src/components/Lift/@types';
 
-export type LiftPropsType = {
+type LiftPropsType = {
     floorValueButton: FloorValueButtonType
-    height: number
-    stopLift: (isPressed: boolean) => void
+    onStopLift: () => void
 }
-
-type TimingFunctionType = Extract<CSSProperties['transitionTimingFunction'],
-    'linear' | 'ease-in' | 'ease-out' | 'ease-in-out'>
-
-
-export type StatusType = 'stop' | 'stopping' | 'progress' | 'start';
 
 export const Lift = (props: LiftPropsType) => {
 
@@ -25,13 +18,12 @@ export const Lift = (props: LiftPropsType) => {
 
     const moveLift = (floor: number, delay: number) => {
 
-
         if (floor === props.floorValueButton.floor) {
             setStatus('stop')
             setSpeed(SLOW_SPEED)
             setTimingFunction('ease-in')
             setCurrentFloor(floor)
-            props.stopLift(false)
+            props.onStopLift()
 
         } else {
 
@@ -102,16 +94,9 @@ export const Lift = (props: LiftPropsType) => {
         <SLift
             status={status}
             floor={currentFloor}
-            height={props.height}
             speed={speed}
             timingFunction={timingFunction}
 
         />
     );
 };
-
-
-
-
-
-
