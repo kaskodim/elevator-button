@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {SLift} from '@src/components/Lift/styles';
 import {FloorValueButtonType} from '@src/components/House/House';
 import {DELAYED_START, NORMAL_SPEED, SLOW_SPEED, VERY_SLOW_SPEED} from '@src/constants';
-import {StatusType, TimingFunctionType} from '@src/components/Lift/@types';
+import {StatusType, TimingFunctionType} from '@src/components/Lift/types';
 
 type LiftPropsType = {
     floorValueButton: FloorValueButtonType

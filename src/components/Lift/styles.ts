@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import liftImage from '@src/images/lift_image.png'
 import {FLOOR_HEIGHT} from '@src/constants';
-import {StatusType, TimingFunctionType} from '@src/components/Lift/@types';
+import {StatusType, TimingFunctionType} from '@src/components/Lift/types';
 
 export type SLiftPropsType = {
     floor: number
