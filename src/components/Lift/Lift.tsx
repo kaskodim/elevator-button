@@ -4,9 +4,15 @@ import {FloorValueButtonType} from '@src/components/House/House';
 import {DELAYED_START, NORMAL_SPEED, SLOW_SPEED, VERY_SLOW_SPEED} from '@src/constants';
 import {StatusType, TimingFunctionType} from '@src/components/Lift/types';
 
+
+export type LiftLocationType = 'one' | 'two'
+
 type LiftPropsType = {
     floorValueButton: FloorValueButtonType
     onStopLift: () => void
+    liftLocation: LiftLocationType
+    changeLiftInMotion: (liftInMotion: boolean) => void
+    liftInMotion: boolean
 }
 
 export const Lift = (props: LiftPropsType) => {
@@ -24,6 +30,8 @@ export const Lift = (props: LiftPropsType) => {
             setTimingFunction('ease-in')
             setCurrentFloor(floor)
             props.onStopLift()
+
+            props.changeLiftInMotion(false)
 
         } else {
 
@@ -70,24 +78,33 @@ export const Lift = (props: LiftPropsType) => {
 
     useEffect(() => {
 
+
         if (!(currentFloor === props.floorValueButton.floor)) {
 
             setStatus('start')
-            const isNeighboringFloor = Math.abs(currentFloor - props.floorValueButton.floor) !== 1;
+            if (!props.liftInMotion) {
+                props.changeLiftInMotion(true)
 
-            setTimeout(() => {
+                const isNeighboringFloor = Math.abs(currentFloor - props.floorValueButton.floor) !== 1;
 
-                if (isNeighboringFloor) {
-                    setTimingFunction('ease-in')
-                    setSpeed(SLOW_SPEED)
-                    moveLift(currentFloor, speed);
+                setTimeout(() => {
 
-                } else {
-                    setTimingFunction('ease-in-out')
-                    setSpeed(VERY_SLOW_SPEED)
-                    moveLift(currentFloor, VERY_SLOW_SPEED);
-                }
-            }, DELAYED_START)
+                    if (isNeighboringFloor) {
+                        setTimingFunction('ease-in')
+                        setSpeed(SLOW_SPEED)
+                        moveLift(currentFloor, speed);
+
+                    } else {
+                        setTimingFunction('ease-in-out')
+                        setSpeed(VERY_SLOW_SPEED)
+                        moveLift(currentFloor, VERY_SLOW_SPEED);
+                    }
+                }, DELAYED_START)
+
+
+            }
+
+
         }
     }, [props.floorValueButton])
     return (
@@ -96,6 +113,7 @@ export const Lift = (props: LiftPropsType) => {
             floor={currentFloor}
             speed={speed}
             timingFunction={timingFunction}
+            liftLocation={props.liftLocation}
 
         />
     );

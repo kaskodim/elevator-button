@@ -1,16 +1,19 @@
 import {SFloor, SFloorInner} from './styles';
 import {Button} from '@src/styles/Button';
+import {FloorValueButtonType} from '@src/components/House/House';
 
 export type FloorPropsType = {
     floor: number
-    onStartLift: (floor: number) => void
     isPressed: boolean
+    addQueue: (floor: number) => void
+    queue: FloorValueButtonType[]
 }
 
 export const Floor = (props: FloorPropsType) => {
 
     const onclickHandler = () => {
-        props.onStartLift(props.floor)
+        props.addQueue(props.floor)
+
     }
 
     return (
