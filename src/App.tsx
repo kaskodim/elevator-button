@@ -1,11 +1,9 @@
 import React from 'react';
-import ElevatorButton from './components/elevatorButton/ElevatorButton';
+import {House} from '@src/components/House/House';
 
 function App() {
     return (
-        <div className="App">
-            <ElevatorButton/>
-        </div>
+            <House/>
     );
 }
 
