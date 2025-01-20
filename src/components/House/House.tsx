@@ -1,9 +1,9 @@
-import {Container} from '../Container';
+import {Container} from '../../styles/Container';
 import {Floor} from '../Floor/Floor';
 import {createFloors} from '@src/utils';
 import {Lift} from '@src/components/Lift/Lift';
 import {useState} from 'react';
-import {SHouse} from '@src/components/House/style';
+import {SHouse} from '@src/components/House/styles';
 import {FLOOR_COUNT} from '@src/constants';
 
 export type FloorValueButtonType = {

@@ -73,11 +73,11 @@ export const Lift = (props: LiftPropsType) => {
         if (!(currentFloor === props.floorValueButton.floor)) {
 
             setStatus('start')
-            const nextFloor = Math.abs(currentFloor - props.floorValueButton.floor) !== 1;
+            const isNeighboringFloor = Math.abs(currentFloor - props.floorValueButton.floor) !== 1;
 
             setTimeout(() => {
 
-                if (nextFloor) {
+                if (isNeighboringFloor) {
                     setTimingFunction('ease-in')
                     setSpeed(SLOW_SPEED)
                     moveLift(currentFloor, speed);

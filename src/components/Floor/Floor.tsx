@@ -1,6 +1,5 @@
 import {SFloor, SFloorInner} from './styles';
-import {Button} from '@src/styles/Button/Button';
-import {FLOOR_NAME} from '@src/constants';
+import {Button} from '@src/styles/Button';
 
 export type FloorPropsType = {
     floor: number
@@ -17,7 +16,7 @@ export const Floor = (props: FloorPropsType) => {
     return (
         <SFloor>
             <SFloorInner>
-                {FLOOR_NAME}
+                {'ЭТАЖ '}
                 {props.floor}
             </SFloorInner>
 
