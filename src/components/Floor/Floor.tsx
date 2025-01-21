@@ -1,12 +1,11 @@
 import {SFloor, SFloorInner} from './styles';
 import {Button} from '@src/styles/Button';
-import {FloorValueButtonType} from '@src/components/House/House';
+
 
 export type FloorPropsType = {
     floor: number
     isPressed: boolean
     addQueue: (floor: number) => void
-    queue: FloorValueButtonType[]
 }
 
 export const Floor = (props: FloorPropsType) => {

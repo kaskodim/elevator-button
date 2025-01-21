@@ -9,65 +9,157 @@ import {FLOOR_COUNT} from '@src/constants';
 export type FloorValueButtonType = {
     floor: number
     isPressed: boolean
+
+}
+
+type LiftInMotionType = {
+    leftLift: boolean
+    rightLift: boolean
 }
 
 export const House = () => {
+debugger
+        const [queue, setQueue] = useState<FloorValueButtonType[]>([]);
+        const [targetLiftLeft, setTargetLiftLeft] = useState<FloorValueButtonType>({floor: 1, isPressed: false});
+        const [targetLiftRight, setTargetLiftRight] = useState<FloorValueButtonType>({floor: 1, isPressed: false});
+        const [liftInMotion, setLiftInMotion] = useState<LiftInMotionType>({leftLift: false, rightLift: false});
+        console.log('LEFT', liftInMotion.leftLift)
+        console.log('RIGHT', liftInMotion.rightLift)
+        console.log({queue})
 
-    const [queue, setQueue] = useState<FloorValueButtonType[]>([]);
-    const [floorValueButton, setFloorValueButton] = useState<FloorValueButtonType>({floor: 1, isPressed: false});
-    const [liftInMotion, setLiftInMotion] = useState<boolean>(false)
 
-    const floors = createFloors(FLOOR_COUNT)
+        const floors = createFloors(FLOOR_COUNT)
 
-    const changeLiftInMotion = (liftInMotion: boolean) => {
-        setLiftInMotion(liftInMotion)
-    }
 
-    const addQueue = (floor: number) => {
-        const newFloorValue = {floor: floor, isPressed: true}
-        setQueue(queue.length === 0 ? [newFloorValue] : [...queue, newFloorValue]);
-    }
+        console.log(queue)
 
-    useEffect(() => {
 
-            if (liftInMotion || queue.length === 0) {
-            } else if (!liftInMotion) {
-                setFloorValueButton(queue[0])
-                if (queue[0] === floorValueButton) {
-                    setQueue([...queue].slice(1))
+        const addQueue = (floor: number) => {
+            const newFloorValue = {floor: floor, isPressed: true}
+
+            setQueue(queue.length === 0 || queue[0].floor === newFloorValue.floor ? [newFloorValue] : [...queue, newFloorValue]);
+        }
+
+        useEffect(() => {
+
+                if (queue.length !== 0 && queue[0] !== undefined) {
+                    const differenceR = Math.abs(queue[0].floor - targetLiftRight.floor)
+                    const differenceL = Math.abs(queue[0].floor - targetLiftLeft.floor)
+
+
+                    // если оба лифта едут - ничего не делаем   !liftInMotion.rightLift && !liftInMotion.leftLift
+                    if (liftInMotion.leftLift && liftInMotion.rightLift) {
+
+                    }
+
+
+                    // если едет только 1 лифт, тогда запускаем второй (на дистанцию не влияет условие)
+                    else if ((liftInMotion.leftLift && !liftInMotion.rightLift) || (!liftInMotion.leftLift && liftInMotion.rightLift)) {
+
+                        if (!liftInMotion.rightLift) {
+                            console.log('правый')
+
+                            setTargetLiftRight(queue[0])
+
+                            setQueue([...queue].slice(1))
+                            setLiftInMotion({...liftInMotion, rightLift: true})
+                        } else if (!liftInMotion.leftLift) {
+                            console.log('левый')
+
+                            setTargetLiftLeft(queue[0])
+
+                            setQueue([...queue].slice(1))
+                            setLiftInMotion({...liftInMotion, leftLift: true})
+                        }
+                    }
+
+                        // правый лифт должен ехать
+                        // если он стоит и   ( левый лифт занят ИЛИ дистанция меньше или равна левому)
+
+
+                        // правый лифт едет
+                        // если он стоит и (  дистанция меньше или равна левому  )
+                        // Не учтено, что дистанция не влиет, когда только 1 лифт стоит
+                    //      RIGHT
+                    else if (!liftInMotion.leftLift && !liftInMotion.rightLift) {
+
+                        console.log('я в ELSE')
+
+                        if (!liftInMotion.rightLift && differenceR <= differenceL) {
+
+                            setTargetLiftRight(queue[0])
+                            setQueue([...queue].slice(1))
+                            setLiftInMotion({...liftInMotion, rightLift: true})
+
+                        } else {
+
+                            setTargetLiftLeft(queue[0])
+                            setQueue([...queue].slice(1))
+                            setLiftInMotion({...liftInMotion, leftLift: true})
+
+                        }
+                    }
+
                 }
+
+
+            }, [liftInMotion, targetLiftLeft, targetLiftRight, queue]
+        )
+
+        const onStopLift = (lift: string | undefined) => {
+
+
+
+            console.log(lift)
+            if (lift === undefined) {
+                console.log('undefined')
             }
-        }, [floorValueButton, queue, liftInMotion]
-    )
-    const onStopLift = () => {
-        console.log('я пока бесполезная функция, но могу сказать что он там доехал')
+
+            if (lift === 'left') {
+                console.log('ЛЕВЫЙ доехал')
+                setLiftInMotion({ ...liftInMotion, leftLift: false });
+
+            }
+            if (lift === 'right') {
+                console.log('ПРАВЫЙ доехал')
+                setLiftInMotion({ ...liftInMotion, rightLift: false });
+
+            }
+        }
+
+
+        return (
+            <SHouse>
+                <Container>
+                    {floors.map((f) => (
+                            <Floor key={f.id}
+                                   floor={f.floor}
+                                   addQueue={addQueue}
+                                   isPressed={false}
+                            />
+                        )
+                    )}
+
+                    <Lift liftLocation={'left'}
+                          floorValueButton={targetLiftLeft}
+                          onStopLift={onStopLift}
+
+
+                    />
+
+                    <Lift liftLocation={'right'}
+                          floorValueButton={targetLiftRight}
+                          onStopLift={onStopLift}
+
+
+                    />
+
+
+                </Container>
+            </SHouse>
+        );
     }
-
-
-    return (
-        <SHouse>
-            <Container>
-                {floors.map((f) => (
-                        <Floor key={f.id}
-                               floor={f.floor}
-                               addQueue={addQueue}
-                               isPressed={false}
-                               queue={queue}
-                        />
-                    )
-                )}
-
-                <Lift liftLocation={'one'}
-                      floorValueButton={floorValueButton}
-                      onStopLift={onStopLift}
-                      changeLiftInMotion={changeLiftInMotion}
-                      liftInMotion={liftInMotion}
-
-                />
-            </Container>
-        </SHouse>
-    );
-};
+;
 
 
 

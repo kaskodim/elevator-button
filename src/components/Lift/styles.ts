@@ -12,11 +12,11 @@ export type SLiftPropsType = {
     liftLocation: LiftLocationType
 }
 
-const oneLift = css`
+const leftLift = css`
     left: 0;
     margin-left: 15px;
 `
-const twoLift = css`
+const rightLift = css`
     right: 0;
     margin-right: 15px;
 `
@@ -24,7 +24,7 @@ const twoLift = css`
 
 export const SLift = styled.div<SLiftPropsType>`
 
-    ${props => props.liftLocation === 'one' ? oneLift : twoLift};
+    ${props => props.liftLocation === 'left' ? leftLift : rightLift};
 
     width: 70px;
     height: ${FLOOR_HEIGHT}px;

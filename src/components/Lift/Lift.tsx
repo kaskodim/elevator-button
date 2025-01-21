@@ -5,14 +5,14 @@ import {DELAYED_START, NORMAL_SPEED, SLOW_SPEED, VERY_SLOW_SPEED} from '@src/con
 import {StatusType, TimingFunctionType} from '@src/components/Lift/types';
 
 
-export type LiftLocationType = 'one' | 'two'
+export type LiftLocationType = 'left' | 'right'
 
 type LiftPropsType = {
     floorValueButton: FloorValueButtonType
-    onStopLift: () => void
+    onStopLift: (lift: string | undefined) => void
     liftLocation: LiftLocationType
-    changeLiftInMotion: (liftInMotion: boolean) => void
-    liftInMotion: boolean
+
+
 }
 
 export const Lift = (props: LiftPropsType) => {
@@ -29,9 +29,10 @@ export const Lift = (props: LiftPropsType) => {
             setSpeed(SLOW_SPEED)
             setTimingFunction('ease-in')
             setCurrentFloor(floor)
-            props.onStopLift()
+            props.onStopLift(props.liftLocation)
 
-            props.changeLiftInMotion(false)
+
+
 
         } else {
 
@@ -82,8 +83,7 @@ export const Lift = (props: LiftPropsType) => {
         if (!(currentFloor === props.floorValueButton.floor)) {
 
             setStatus('start')
-            if (!props.liftInMotion) {
-                props.changeLiftInMotion(true)
+
 
                 const isNeighboringFloor = Math.abs(currentFloor - props.floorValueButton.floor) !== 1;
 
@@ -102,11 +102,12 @@ export const Lift = (props: LiftPropsType) => {
                 }, DELAYED_START)
 
 
-            }
+
 
 
         }
     }, [props.floorValueButton])
+
     return (
         <SLift
             status={status}
