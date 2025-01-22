@@ -1,15 +1,14 @@
 {
   "files": {
     "main.css": "/elevator-button/static/css/main.a30dd12f.css",
-    "main.js": "/elevator-button/static/js/main.c2703aae.js",
-    "static/media/wall_texture.jpg": "/elevator-button/static/media/wall_texture.007a6b2285d6fc24761d.jpg",
+    "main.js": "/elevator-button/static/js/main.3a77b764.js",
     "static/media/lift_image.png": "/elevator-button/static/media/lift_image.bd3f40e2634c5a338505.png",
     "index.html": "/elevator-button/index.html",
     "main.a30dd12f.css.map": "/elevator-button/static/css/main.a30dd12f.css.map",
-    "main.c2703aae.js.map": "/elevator-button/static/js/main.c2703aae.js.map"
+    "main.3a77b764.js.map": "/elevator-button/static/js/main.3a77b764.js.map"
   },
   "entrypoints": [
     "static/css/main.a30dd12f.css",
-    "static/js/main.c2703aae.js"
+    "static/js/main.3a77b764.js"
   ]
 }
