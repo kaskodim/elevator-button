@@ -5,12 +5,7 @@ import {Lift} from '@src/components/Lift/Lift';
 import {useEffect, useState} from 'react';
 import {SHouse} from '@src/components/House/styles';
 import {FLOOR_COUNT} from '@src/constants';
-
-export type FloorValueButtonType = {
-    floor: number
-    isPressed: boolean
-
-}
+import {RefreshButton} from '@src/components/RefreshButton/RefreshButton';
 
 type LiftInMotionType = {
     leftLift: boolean
@@ -18,115 +13,80 @@ type LiftInMotionType = {
 }
 
 export const House = () => {
-debugger
-        const [queue, setQueue] = useState<FloorValueButtonType[]>([]);
-        const [targetLiftLeft, setTargetLiftLeft] = useState<FloorValueButtonType>({floor: 1, isPressed: false});
-        const [targetLiftRight, setTargetLiftRight] = useState<FloorValueButtonType>({floor: 1, isPressed: false});
-        const [liftInMotion, setLiftInMotion] = useState<LiftInMotionType>({leftLift: false, rightLift: false});
-        console.log('LEFT', liftInMotion.leftLift)
-        console.log('RIGHT', liftInMotion.rightLift)
-        console.log({queue})
 
+        const [queue, setQueue] = useState<number[]>([])
+        const [targetLiftLeft, setTargetLiftLeft] = useState<number>(1)
+        const [targetLiftRight, setTargetLiftRight] = useState<number>(1)
+        const [liftInMotion, setLiftInMotion] = useState<LiftInMotionType>({leftLift: false, rightLift: false})
 
         const floors = createFloors(FLOOR_COUNT)
 
-
-        console.log(queue)
-
+        const changeButton = (floor: number) => {
+            return (
+                (queue.find(q => q === floor) !== undefined) ||
+                ((liftInMotion.rightLift && targetLiftRight === floor) ||
+                    ((liftInMotion.leftLift && targetLiftLeft === floor)))
+            )
+        }
 
         const addQueue = (floor: number) => {
-            const newFloorValue = {floor: floor, isPressed: true}
-
-            setQueue(queue.length === 0 || queue[0].floor === newFloorValue.floor ? [newFloorValue] : [...queue, newFloorValue]);
+            if (queue.find(f => f === floor)) return;
+            setQueue(queue.length === 0 || queue[0] === floor ? [floor] : [...queue, floor]);
         }
 
         useEffect(() => {
 
                 if (queue.length !== 0 && queue[0] !== undefined) {
-                    const differenceR = Math.abs(queue[0].floor - targetLiftRight.floor)
-                    const differenceL = Math.abs(queue[0].floor - targetLiftLeft.floor)
 
+                    const differenceR = Math.abs(queue[0] - targetLiftRight)
+                    const differenceL = Math.abs(queue[0] - targetLiftLeft)
 
-                    // если оба лифта едут - ничего не делаем   !liftInMotion.rightLift && !liftInMotion.leftLift
-                    if (liftInMotion.leftLift && liftInMotion.rightLift) {
-
+                    // удаляет дубляж целей в очереди
+                    if (queue[0] === targetLiftRight || queue[0] === targetLiftLeft) {
+                        setQueue([...queue].slice(1))
+                        setLiftInMotion((prev) => ({...prev, rightLift: false, leftLift: false}))
                     }
 
-
-                    // если едет только 1 лифт, тогда запускаем второй (на дистанцию не влияет условие)
-                    else if ((liftInMotion.leftLift && !liftInMotion.rightLift) || (!liftInMotion.leftLift && liftInMotion.rightLift)) {
+                    // если едет только 1 лифт, тогда запускаем второй
+                    else if ((liftInMotion.leftLift && !liftInMotion.rightLift) ||
+                        (!liftInMotion.leftLift && liftInMotion.rightLift)) {
 
                         if (!liftInMotion.rightLift) {
-                            console.log('правый')
-
+                            setLiftInMotion((prev) => ({...prev, rightLift: true}))
                             setTargetLiftRight(queue[0])
-
                             setQueue([...queue].slice(1))
-                            setLiftInMotion({...liftInMotion, rightLift: true})
+
                         } else if (!liftInMotion.leftLift) {
-                            console.log('левый')
-
+                            setLiftInMotion((prev) => ({...prev, leftLift: true}))
                             setTargetLiftLeft(queue[0])
-
                             setQueue([...queue].slice(1))
-                            setLiftInMotion({...liftInMotion, leftLift: true})
                         }
                     }
 
-                        // правый лифт должен ехать
-                        // если он стоит и   ( левый лифт занят ИЛИ дистанция меньше или равна левому)
-
-
-                        // правый лифт едет
-                        // если он стоит и (  дистанция меньше или равна левому  )
-                        // Не учтено, что дистанция не влиет, когда только 1 лифт стоит
-                    //      RIGHT
+                    // если оба стоят, то условие с дистанцией едет, который ближе
                     else if (!liftInMotion.leftLift && !liftInMotion.rightLift) {
 
-                        console.log('я в ELSE')
-
-                        if (!liftInMotion.rightLift && differenceR <= differenceL) {
-
+                        if (differenceR <= differenceL) {
+                            setLiftInMotion((prev) => ({...prev, rightLift: true}))
                             setTargetLiftRight(queue[0])
                             setQueue([...queue].slice(1))
-                            setLiftInMotion({...liftInMotion, rightLift: true})
-
                         } else {
-
+                            setLiftInMotion((prev) => ({...prev, leftLift: true}))
                             setTargetLiftLeft(queue[0])
                             setQueue([...queue].slice(1))
-                            setLiftInMotion({...liftInMotion, leftLift: true})
-
                         }
                     }
-
                 }
-
-
             }, [liftInMotion, targetLiftLeft, targetLiftRight, queue]
         )
 
-        const onStopLift = (lift: string | undefined) => {
-
-
-
-            console.log(lift)
-            if (lift === undefined) {
-                console.log('undefined')
-            }
-
-            if (lift === 'left') {
-                console.log('ЛЕВЫЙ доехал')
-                setLiftInMotion({ ...liftInMotion, leftLift: false });
-
-            }
-            if (lift === 'right') {
-                console.log('ПРАВЫЙ доехал')
-                setLiftInMotion({ ...liftInMotion, rightLift: false });
-
+        const onStopLift = (liftLocation: string | undefined) => {
+            if (liftLocation !== undefined) {
+                liftLocation === 'left' ?
+                    setLiftInMotion((prev) => ({...prev, leftLift: false})) :
+                    setLiftInMotion((prev) => ({...prev, rightLift: false}))
             }
         }
-
 
         return (
             <SHouse>
@@ -135,7 +95,7 @@ debugger
                             <Floor key={f.id}
                                    floor={f.floor}
                                    addQueue={addQueue}
-                                   isPressed={false}
+                                   isPressed={changeButton(f.floor)}
                             />
                         )
                     )}
@@ -143,19 +103,14 @@ debugger
                     <Lift liftLocation={'left'}
                           floorValueButton={targetLiftLeft}
                           onStopLift={onStopLift}
-
-
                     />
 
                     <Lift liftLocation={'right'}
                           floorValueButton={targetLiftRight}
                           onStopLift={onStopLift}
-
-
                     />
-
-
                 </Container>
+                <RefreshButton/>
             </SHouse>
         );
     }

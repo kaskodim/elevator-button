@@ -1,10 +1,12 @@
-import React from 'react';
+import { StyleSheetManager } from 'styled-components';
+import isPropValid from '@emotion/is-prop-valid';
 import {House} from '@src/components/House/House';
 
-function App() {
-    return (
-            <House/>
-    );
-}
+const App = () => (
+    <StyleSheetManager shouldForwardProp={(prop) => isPropValid(prop)}>
+        <House />
+    </StyleSheetManager>
+);
+
 
 export default App;

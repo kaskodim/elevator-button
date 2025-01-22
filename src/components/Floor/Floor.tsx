@@ -1,6 +1,5 @@
-import {SFloor, SFloorInner} from './styles';
+import {SFloor} from './styles';
 import {Button} from '@src/styles/Button';
-
 
 export type FloorPropsType = {
     floor: number
@@ -9,18 +8,16 @@ export type FloorPropsType = {
 }
 
 export const Floor = (props: FloorPropsType) => {
-
     const onclickHandler = () => {
         props.addQueue(props.floor)
-
     }
 
     return (
         <SFloor>
-            <SFloorInner>
+            <>
                 {'ЭТАЖ '}
                 {props.floor}
-            </SFloorInner>
+            </>
 
             <Button
                 onClick={onclickHandler}
@@ -29,7 +26,3 @@ export const Floor = (props: FloorPropsType) => {
         </SFloor>
     )
 }
-
-
-
-

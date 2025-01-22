@@ -18,7 +18,6 @@ const pressed = css`
 `
 
 export const Button = styled.button<{ isPressed: boolean }>`
-
     position: relative;
     width: 40px;
     height: 40px;
@@ -27,8 +26,7 @@ export const Button = styled.button<{ isPressed: boolean }>`
     border-style: none;
     box-shadow: 0 0 4px 2px #00000096;
     background: rgba(0, 0, 255, 0.78);
-
-
+    
     &::before {
         content: '';
         position: absolute;
@@ -39,8 +37,7 @@ export const Button = styled.button<{ isPressed: boolean }>`
         background: #7F9BAA;
         border-radius: 50%;
         transform: translate(-50%, -50%);
-        transition: all 0.3s ease-in-out;
-
+        transition: all 0.1s ease-in-out;
     }
 
     &::after {
@@ -53,13 +50,11 @@ export const Button = styled.button<{ isPressed: boolean }>`
         transform: translate(-50%, -50%);
         transition: all 0.3s ease-in-out;
         border-radius: 50%;
-
         background: #67676e;
         z-index: 100;
     }
-
-
-    ${props => props.isPressed ? pressed : notPressed} ;
+    ${props => props.isPressed ? pressed : notPressed};
+    
 `
 
 
