@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.css": "/elevator-button/static/css/main.a30dd12f.css",
-    "main.js": "/elevator-button/static/js/main.0b9c6ac2.js",
+    "main.css": "/elevator-button/static/css/main.45153aa2.css",
+    "main.js": "/elevator-button/static/js/main.6ff741dc.js",
+    "static/media/Rubik80sFade-Regular.ttf": "/elevator-button/static/media/Rubik80sFade-Regular.54531611b84de276d471.ttf",
     "static/media/lift_image.png": "/elevator-button/static/media/lift_image.bd3f40e2634c5a338505.png",
     "static/media/wall_texture.webp": "/elevator-button/static/media/wall_texture.e909d4a00b1cea16f008.webp",
     "index.html": "/elevator-button/index.html",
-    "main.a30dd12f.css.map": "/elevator-button/static/css/main.a30dd12f.css.map",
-    "main.0b9c6ac2.js.map": "/elevator-button/static/js/main.0b9c6ac2.js.map"
+    "main.45153aa2.css.map": "/elevator-button/static/css/main.45153aa2.css.map",
+    "main.6ff741dc.js.map": "/elevator-button/static/js/main.6ff741dc.js.map"
   },
   "entrypoints": [
-    "static/css/main.a30dd12f.css",
-    "static/js/main.0b9c6ac2.js"
+    "static/css/main.45153aa2.css",
+    "static/js/main.6ff741dc.js"
   ]
 }
