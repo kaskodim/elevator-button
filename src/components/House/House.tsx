@@ -33,11 +33,14 @@ export const House = () => {
 
         const addQueue = (floor: number) => {
 
-            const floorNotInTargetsOrQueue = (floor !== targetLiftLeft) && (floor !== targetLiftRight) && (floor !== queue[0])
+            const floorNotInTargets = floor !== targetLiftLeft && floor !== targetLiftRight
             const floorNotInQueue = !queue.find(f => f === floor)
-            const queueCheck = !!queue.length || queue[0] !== floor
 
-            if (floorNotInTargetsOrQueue && floorNotInQueue && queueCheck) {
+            // TODO: вернуть если будет нужно ИЛИ удалить, если нет багов
+            //  if (floorNotInTargets && floorNotInQueue && queueCheck)
+            // const queueCheck = !!queue.length || queue[0] !== floor
+
+            if (floorNotInTargets && floorNotInQueue) {
                 setQueue((prev) => [...prev, floor])
             }
         }
