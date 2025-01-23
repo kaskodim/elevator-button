@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/elevator-button/static/css/main.c6011745.css",
+    "main.css": "/elevator-button/static/css/main.46efd5fa.css",
     "main.js": "/elevator-button/static/js/main.b364fcbf.js",
     "static/media/Rubik80sFade-Regular.ttf": "/elevator-button/static/media/Rubik80sFade-Regular.54531611b84de276d471.ttf",
     "static/media/lift_image.png": "/elevator-button/static/media/lift_image.bd3f40e2634c5a338505.png",
     "static/media/wall_texture.webp": "/elevator-button/static/media/wall_texture.e909d4a00b1cea16f008.webp",
     "index.html": "/elevator-button/index.html",
-    "main.c6011745.css.map": "/elevator-button/static/css/main.c6011745.css.map",
+    "main.46efd5fa.css.map": "/elevator-button/static/css/main.46efd5fa.css.map",
     "main.b364fcbf.js.map": "/elevator-button/static/js/main.b364fcbf.js.map"
   },
   "entrypoints": [
-    "static/css/main.c6011745.css",
+    "static/css/main.46efd5fa.css",
     "static/js/main.b364fcbf.js"
   ]
 }
