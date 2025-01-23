@@ -23,20 +23,22 @@ export const House = () => {
         const floors = createFloors(FLOOR_COUNT)
 
         const getIsButtonPressed = (floor: number) => {
-            return (
-                (queue.find(q => q === floor) !== undefined) ||
-                ((liftsState.isRightLiftMoving && targetLiftRight === floor) ||
-                    ((liftsState.isLeftLiftMoving && targetLiftLeft === floor)))
-            )
+
+            const isFloorInQueue = queue.find(q => q === floor) !== undefined
+            const isRightLiftMovingToFloor = liftsState.isRightLiftMoving && targetLiftRight === floor
+            const isLeftLiftMovingToFloor = liftsState.isLeftLiftMoving && targetLiftLeft === floor
+
+            return isFloorInQueue || isRightLiftMovingToFloor || isLeftLiftMovingToFloor
         }
 
         const addQueue = (floor: number) => {
-            if ((floor !== targetLiftLeft) && (floor !== targetLiftRight) && (floor !== queue[0])) {
-                if (!queue.find(f => f === floor)) {
-                    if (!!queue.length || queue[0] !== floor) {
-                        setQueue((prev) => [...prev, floor])
-                    }
-                }
+
+            const floorNotInTargetsOrQueue = (floor !== targetLiftLeft) && (floor !== targetLiftRight) && (floor !== queue[0])
+            const floorNotInQueue = !queue.find(f => f === floor)
+            const queueCheck = !!queue.length || queue[0] !== floor
+
+            if (floorNotInTargetsOrQueue && floorNotInQueue && queueCheck) {
+                setQueue((prev) => [...prev, floor])
             }
         }
 
@@ -50,7 +52,7 @@ export const House = () => {
             setQueue([...queue].slice(1))
         }
 
-        const onStopLift = (liftLocation: string) => {
+        const onStopLift = (liftLocation: LiftLocationType) => {
             liftLocation === 'left' ?
                 setLiftsState((prev) => ({...prev, isLeftLiftMoving: false})) :
                 setLiftsState((prev) => ({...prev, isRightLiftMoving: false}))
@@ -59,9 +61,6 @@ export const House = () => {
         useEffect(() => {
 
                 if (queue.length !== 0 && queue[0] !== undefined) {
-
-                    const differenceR = Math.abs(queue[0] - targetLiftRight)
-                    const differenceL = Math.abs(queue[0] - targetLiftLeft)
 
                     // если едет только 1 лифт, тогда запускаем второй
                     if ((liftsState.isLeftLiftMoving && !liftsState.isRightLiftMoving) ||
@@ -72,6 +71,9 @@ export const House = () => {
 
                     // если оба стоят, то условие с дистанцией; едет, который ближе
                     else if (!liftsState.isLeftLiftMoving && !liftsState.isRightLiftMoving) {
+
+                        const differenceR = Math.abs(queue[0] - targetLiftRight)
+                        const differenceL = Math.abs(queue[0] - targetLiftLeft)
 
                         differenceR <= differenceL ? onStartLift('right') : onStartLift('left')
                     }

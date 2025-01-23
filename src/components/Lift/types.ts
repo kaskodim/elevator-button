@@ -9,7 +9,7 @@ export type StatusType = 'stop' | 'moving';
 
 export type LiftPropsType = {
     floorValueButton: number
-    onStopLift: (lift: string) => void
+    onStopLift: (lift: LiftLocationType) => void
     liftLocation: LiftLocationType
 }
 

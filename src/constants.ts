@@ -1,4 +1,4 @@
-export const FLOOR_COUNT: number = 7;
+export const FLOOR_COUNT: number = 8;
 export const FLOOR_HEIGHT: number = 120;
 export const DEFAULT_SPEED = 0.7
 
