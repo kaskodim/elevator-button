@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 export const SHouse = styled.div`
-    text-align: center;
+    width: 300px;
     display: flex;
-    justify-content: center;
-    margin-top: 50px;
+    flex-direction: column;
+    border: 1px solid black;
+    position: relative;
+    cursor: default;
 `

@@ -8,6 +8,6 @@
 
 > Пока не адаптировано под мобильную версию.
 
-### Demo: 
-[https://kaskodim.github.io/elevator-button/](kaskodim.github.io/elevator-button/)
+### Demo: [Кнопка лифта](https://kaskodim.github.io/elevator-button/)
+
 
