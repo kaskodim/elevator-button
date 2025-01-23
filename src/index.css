@@ -10,3 +10,11 @@ body {
   font-style: normal;
 }
 
+@font-face {
+
+  font-family: 'Rubik 80s Fade';
+  src: url("fonts/Rubik80sFade-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

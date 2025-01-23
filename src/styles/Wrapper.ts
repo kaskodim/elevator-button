@@ -6,4 +6,6 @@ export const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
     margin: 15px;
+    cursor: default;
+    
 `

@@ -3,8 +3,8 @@ import {FLOOR_HEIGHT} from '@src/constants';
 
 export const SFloor = styled.div`
     height: ${FLOOR_HEIGHT}px;
-    font-size: 20px;
-    outline: 5px solid #c13838;
+    outline: 8px solid #595753;
+    border-radius: 2px;
     user-select: none;
     display: flex;
     flex-direction: column;
@@ -13,5 +13,8 @@ export const SFloor = styled.div`
     position: relative;
     box-shadow: inset 0 4px 8px 3px #090909;
     z-index: 5;
+
+
+  
 `
 
