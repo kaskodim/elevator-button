@@ -54,15 +54,15 @@ export const Lift = (props: LiftPropsType) => {
     }
 
     useEffect(() => {
-        if (!(currentFloor === props.floorValueButton)) {
-            setStatus('start')
-            const isNeighboringFloor = Math.abs(currentFloor - props.floorValueButton) !== 1;
+        if (currentFloor !== props.floorValueButton) {
+            setStatus('moving')
+            const isNeighboringFloor = Math.abs(currentFloor - props.floorValueButton) === 1;
 
             setTimeout(() => {
-                if (isNeighboringFloor) {
+                if (!isNeighboringFloor) {
                     setTimingFunction('ease-in')
                     setSpeed(SLOW_SPEED)
-                    moveLift(currentFloor, speed);
+                    moveLift(currentFloor, SLOW_SPEED);
                 } else {
                     setTimingFunction('ease-in-out')
                     setSpeed(VERY_SLOW_SPEED)

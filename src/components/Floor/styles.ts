@@ -15,10 +15,3 @@ export const SFloor = styled.div`
     z-index: 5;
 `
 
-export const ButtonArea = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    
-`

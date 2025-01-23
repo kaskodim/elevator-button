@@ -4,21 +4,19 @@ import {Button} from '@src/styles/Button';
 export type FloorPropsType = {
     floor: number
     isPressed: boolean
-    addQueue: (floor: number) => void
+    addQueue: () => void
 }
 
 export const Floor = (props: FloorPropsType) => {
     const onclickHandler = () => {
-        props.addQueue(props.floor)
+        // isp? return
+        props.addQueue()
     }
 
     return (
         <SFloor>
-            <>
                 {'ЭТАЖ '}
                 {props.floor}
-            </>
-
             <Button
                 onClick={onclickHandler}
                 isPressed={props.isPressed}
