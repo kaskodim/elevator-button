@@ -1,16 +1,17 @@
 {
   "files": {
-    "main.css": "/elevator-button/static/css/main.71925ffb.css",
-    "main.js": "/elevator-button/static/js/main.b364fcbf.js",
+    "main.css": "/elevator-button/static/css/main.f229deec.css",
+    "main.js": "/elevator-button/static/js/main.0ea0fae8.js",
     "static/media/Rubik80sFade-Regular.ttf": "/elevator-button/static/media/Rubik80sFade-Regular.54531611b84de276d471.ttf",
+    "static/media/substrate.webp": "/elevator-button/static/media/substrate.5f99a7d7d76a70573d52.webp",
     "static/media/lift_image.png": "/elevator-button/static/media/lift_image.bd3f40e2634c5a338505.png",
-    "static/media/wall_texture.webp": "/elevator-button/static/media/wall_texture.e909d4a00b1cea16f008.webp",
+    "static/media/wall_texture.webp": "/elevator-button/static/media/wall_texture.7859d99d4c1a96ecce57.webp",
     "index.html": "/elevator-button/index.html",
-    "main.71925ffb.css.map": "/elevator-button/static/css/main.71925ffb.css.map",
-    "main.b364fcbf.js.map": "/elevator-button/static/js/main.b364fcbf.js.map"
+    "main.f229deec.css.map": "/elevator-button/static/css/main.f229deec.css.map",
+    "main.0ea0fae8.js.map": "/elevator-button/static/js/main.0ea0fae8.js.map"
   },
   "entrypoints": [
-    "static/css/main.71925ffb.css",
-    "static/js/main.b364fcbf.js"
+    "static/css/main.f229deec.css",
+    "static/js/main.0ea0fae8.js"
   ]
 }
