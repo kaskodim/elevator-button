@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {MAX_MOBILE_WIDTH} from '@src/constants';
 
 export const Wrapper = styled.div`
     display: flex;
@@ -8,7 +9,7 @@ export const Wrapper = styled.div`
     margin: 40px;
     cursor: default;
     
-    @media (max-width: 768px) {
+    @media (max-width: ${MAX_MOBILE_WIDTH}px) {
         margin: 10px;
     }
 `
