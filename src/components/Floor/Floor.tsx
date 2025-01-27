@@ -1,4 +1,4 @@
-import {SFloor} from './styles';
+import {SFloor, STitle} from './styles';
 import {Button} from '@src/styles/Button';
 
 export type FloorPropsType = {
@@ -9,14 +9,16 @@ export type FloorPropsType = {
 
 export const Floor = (props: FloorPropsType) => {
     const onclickHandler = () => {
-        // isp? return
+
         props.addQueue()
     }
 
     return (
         <SFloor>
+            <STitle>
                 {'ЭТАЖ '}
                 {props.floor}
+            </STitle>
             <Button
                 onClick={onclickHandler}
                 isPressed={props.isPressed}

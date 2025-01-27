@@ -1,66 +1,76 @@
 import styled, {css} from 'styled-components';
 
-const notPressed = css`
-    transition: all 0.2s ease-in-out;
-
-`
+const activeColor = `#53CD53FF`
 
 const pressed = css`
-    background: #86cd37;
-    transition: all 0.2s ease-in-out;
-
-    &::after {
-        background: #7CE700;
-        box-shadow: 0 0 9px 0 #7CE700,
-        inset 0 1px 0 0 #7CE700;
+    &:after {
+        content: '';
+        border: 2px solid ${activeColor};
+        box-shadow: 0 0 5px ${activeColor},
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -5px 5px rgba(100, 100, 100, 0.1),
+        inset 0 5px 5px rgba(255, 255, 255, 0.3);
     }
-
+    &:before {
+        box-shadow: inset 0 0 9px 0 ${activeColor},
+        0 0 9px 0 ${activeColor};
+        background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(56,158,40,1) 77%);
+    }
 `
 
 export const Button = styled.button<{ isPressed: boolean }>`
-    position: relative;
-    width: 40px;
-    height: 40px;
+    position: absolute;
+    width: 4em;
+    height: 4em;
+    left: 50%;
+    bottom: 15px;
+    transform: translateX(-50%);
     border-radius: 50%;
-    user-select: none;
-    border-style: none;
-    box-shadow: 0 0 4px 2px #00000096;
-    background: rgba(0, 0, 255, 0.78);
+    background: linear-gradient(#ccc, #fff);
+    z-index: -1;
+    border: 1px solid #939393;
     
-    &::before {
-        content: '';
+    &:after {
+        content: "";
         position: absolute;
-        top: 50%;
+        width: 3em;
+        height: 3em;
         left: 50%;
-        width: 38px;
-        height: 38px;
-        background: #7F9BAA;
-        border-radius: 50%;
+        top: 50%;
         transform: translate(-50%, -50%);
-        transition: all 0.1s ease-in-out;
+        border-radius: 50%;
+        background: #eaeaea;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        inset 0 -5px 5px rgba(100, 100, 100, 0.1),
+        inset 0 5px 5px rgba(255, 255, 255, 0.3);
+        border: 0.1em solid rgb(142, 142, 142);
+        z-index: 1;
+    }
+    
+    &:before {
+        content: "";
+        position: absolute;
+        width: 0.7em;
+        height: 0.7em;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        background: #c8c8c8;
+        box-shadow: inset 0 0 1px 0 rgb(111 111 111 / 74%);;
+        z-index: 2;
     }
 
-    &::after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 6px;
-        height: 6px;
-        transform: translate(-50%, -50%);
-        transition: all 0.3s ease-in-out;
-        border-radius: 50%;
-        background: #67676e;
-        z-index: 100;
+    &:active {
+        &:after {
+            width: 2.95em;
+            height: 2.95em;
+        }
+
+        &:before {
+            width: 0.65em;
+            height: 0.65em;
+        }
     }
-    ${props => props.isPressed ? pressed : notPressed};
     
+    ${props => props.isPressed ? pressed : ''}
 `
-
-
-
-
-
-
-
-

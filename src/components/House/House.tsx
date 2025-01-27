@@ -1,9 +1,8 @@
 import {Floor} from '../Floor/Floor';
-import {createFloors} from '@src/utils';
+import {createFloors, getFloorCount} from '@src/utils';
 import {Lift} from '@src/components/Lift/Lift';
 import {useEffect, useState} from 'react';
 import {SHouse} from '@src/components/House/styles';
-import {FLOOR_COUNT} from '@src/constants';
 import {RefreshButton} from '@src/components/RefreshButton/RefreshButton';
 import {LiftLocationType} from '@src/components/Lift/types';
 import {Wrapper} from '@src/styles/Wrapper';
@@ -20,7 +19,7 @@ export const House = () => {
         const [targetLiftRight, setTargetLiftRight] = useState<number>(1)
         const [liftsState, setLiftsState] = useState<LiftInMotionType>({isLeftLiftMoving: false, isRightLiftMoving: false})
 
-        const floors = createFloors(FLOOR_COUNT)
+        const floors = createFloors(getFloorCount())
 
         const getIsButtonPressed = (floor: number) => {
 
@@ -35,10 +34,6 @@ export const House = () => {
 
             const floorNotInTargets = floor !== targetLiftLeft && floor !== targetLiftRight
             const floorNotInQueue = !queue.find(f => f === floor)
-
-            // TODO: вернуть если будет нужно ИЛИ удалить, если нет багов
-            //  if (floorNotInTargets && floorNotInQueue && queueCheck)
-            // const queueCheck = !!queue.length || queue[0] !== floor
 
             if (floorNotInTargets && floorNotInQueue) {
                 setQueue((prev) => [...prev, floor])

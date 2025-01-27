@@ -34,5 +34,4 @@ export const SLift = styled.div<SLiftPropsType>`
     box-shadow: inset 0 0 20px 4px #090909;
     bottom: ${props => ((FLOOR_HEIGHT * props.floor) - FLOOR_HEIGHT + 'px')};
     transition: bottom ${(props) => props.speed}s ${(props) => props.timingFunction};
-
 `
