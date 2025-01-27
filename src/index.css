@@ -1,20 +1,16 @@
 body {
   margin: 0;
-  font-family: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  font-weight: 600;
-  font-style: normal;
+  font-family: 'Rubik 80s Fade', serif;
+  background-image: url('src/images/substrate.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
 }
 
 @font-face {
-
   font-family: 'Rubik 80s Fade';
   src: url("fonts/Rubik80sFade-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: block;
 }

@@ -6,7 +6,5 @@ export const SHouse = styled.div`
     display: flex;
     flex-direction: column;
     position: relative;
-    
     background-image: url(${wall_texture});
-
 `

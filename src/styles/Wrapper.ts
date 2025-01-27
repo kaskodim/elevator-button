@@ -5,7 +5,10 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 15px;
+    margin: 40px;
     cursor: default;
     
+    @media (max-width: 768px) {
+        margin: 10px;
+    }
 `
